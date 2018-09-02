@@ -62,12 +62,38 @@
       background:black;
       position: absolute;
       top:50%;
+      transform-origin: 100%;
+      transform: rotate(90deg);
+      transition: all 0.25s;
+
     }
 
   </style>
 
   <script>
+  const segundero = document.querySelector('.second-hand');
+  const minut = document.querySelector('.min-hand');
+  const hora = document.querySelector('.hour-hand');
 
+  function setDate(){
+    const now = new Date();
+    const seconds = now.getSeconds();
+    const secondsDeg = (((seconds/60)*360)+90);
+    segundero.style.transform = `rotate(${secondsDeg}deg)`;
+
+    const mins = now.getMinutes();
+    const minsDeg = (((mins/60)*360)+90);
+    minut.style.transform = `rotate(${minsDeg}deg)`;
+
+    let hours = now.getHours();
+    // En el video utiliza getHours() que devuelve la hora entre
+    // 0 y 23. Si lo divide por 12 posicionaría mal la aguja
+    // de las horas.
+    if(hours > 11 ) { hours = hours - 12 } ;
+    const hoursDeg = (((hours/12)*360)+90);
+    hora.style.transform = `rotate(${hoursDeg}deg)`;
+  }
+  setInterval(setDate,1000) ;
 
   </script>
 </body>
