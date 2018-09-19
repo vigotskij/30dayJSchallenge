@@ -182,6 +182,40 @@
     </li>
   </ul>
 <script>
+const timeNodes = document.querySelectorAll('[data-time]');
+const timeArr = Array.from(timeNodes);
+
+// con esta función dentro de .reduce() calculo los segundos dentro
+// de cada nodo y los voy sumado.
+const seconds = timeArr
+  .reduce( ( total, node ) => {
+    // necesité que mins y secs sean variables para poder
+    // aplicar parseFloat sin usar .map( parseFloat )
+    let [ mins, secs ] = node.dataset.time.split( ':' );
+    mins = parseFloat( mins ) ;
+    secs = parseFloat( secs ) ;
+    const nodeSecs = ( mins * 60 ) + secs ;
+    return total + nodeSecs ;
+  }, 0 /* Este bello 0 me sacó de las drogas.
+          Gracias por tanto, perdón por tan poco.*/);
+
+/*
+const seconds = timeArr
+  .map( node => node.dataset.time )
+  .map( timeCode => {
+    const [ mins , secs ] = timeCode.split( ':' ).map( parseFloat );
+    return (( mins * 60 ) + secs );
+  })
+  .reduce(( total, partial ) => total + partial );
+*/
+let secondsLeft = seconds ;
+const hours = Math.floor(secondsLeft / 3600 ) ;
+secondsLeft = seconds % 3600 ;
+const mins = Math.floor(secondsLeft / 60 ) ;
+const secs = secondsLeft % 60 ;
+
+console.log( {hours}, {mins}, {secs} ) ;
+
 </script>
 </body>
 </html>
