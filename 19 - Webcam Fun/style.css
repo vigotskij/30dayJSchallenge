@@ -5,7 +5,12 @@ html {
 *, *:before, *:after {
   box-sizing: inherit;
 }
-
+/*sacamos el video molesto de
+arriba */
+video{
+  width: 0;
+  height: 0;
+}
 html {
   font-size: 10px;
   background:#ffc600;
