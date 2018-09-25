@@ -37,9 +37,33 @@
   }
 </style>
 
-<button></button>
+<button>Once</button>
 <script>
-
+//
+//  Nouns
+//
+const body = document.querySelector('body');
+const divs = document.querySelectorAll('div');
+const button = document.querySelector('button');
+//
+//  Functions
+//
+function logText(evt) {
+  console.log(this.classList.value);
+  evt.stopPropagation();
+}
+//
+//  Event Listeners
+//
+divs.forEach( div => div.addEventListener('click', logText));
+// default: capture: false; agregando stopPropagation() no hace falta agregar
+// nada más.
+button.addEventListener('click', () => {
+  console.log('Bye bye!');
+  body.removeChild(button);
+}, {
+  once: true
+});
 </script>
 </body>
 </html>
