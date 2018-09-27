@@ -13,7 +13,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: sans-serif;
+  font-family: cantarell, sans-serif;
   font-size: 20px;
   margin: 0;
 }
