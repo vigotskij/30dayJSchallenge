@@ -15,6 +15,36 @@
   </div>
 
 <script>
+//
+//  Nouns
+//
+const speed =  document.querySelector('.speed');
+const bar = speed.querySelector('.speed-bar');
+const video = document.querySelector('.flex');
+
+//
+//  Functions
+//
+function handleMove(evt) {
+  const y = evt.pageY - this.offsetTop ;
+  const proportionY = y / this.offsetHeight ;
+  const min = 0.4 ;
+  const max = 4 ;
+  const height = Math.round( proportionY*100)+'%';
+  const playbackRate = proportionY * (max - min) + min ;
+
+  bar.style.height = height ;
+  bar.textContent = playbackRate.toFixed(2) + '×';
+
+  video.playbackRate = playbackRate ;
+}
+
+//
+//  Event Listeners
+//
+speed.addEventListener( 'mousemove', handleMove );
+
+
 </script>
 </body>
 </html>
