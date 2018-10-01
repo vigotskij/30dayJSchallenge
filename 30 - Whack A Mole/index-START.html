@@ -42,6 +42,8 @@ const moles = document.querySelectorAll('.mole');
 let lastHole;
 let timeUp = false;
 let score = 0 ;
+let game;
+
 //
 //  Functions
 //
@@ -62,12 +64,13 @@ function popMole() {
   const hole = randomHole(holes) ;
   hole.classList.add('up');
 
-  setTimeout( () =>{
+  game = setTimeout( () =>{
     hole.classList.remove('up');
-    if(!timeUp) popMole();
+   if(!timeUp) popMole();
 }, time );
 }
 function startGame() {
+  resetGame();
   scoreBoard.textContent = 0 ;
   timeUp = false ;
   score = 0 ;
@@ -77,8 +80,15 @@ function startGame() {
 function hammer(evt) {
   if(!evt.isTrusted) return ;
   score++ ;
-  this.classList.remove('up');
+  const target = evt.currentTarget.offsetParent ;
+  target.classList.remove('up');
   scoreBoard.textContent = score ;
+}
+// cuando apretabas Start varias veces iniciabas varios juegos a la vez
+// similar al problema del reloj del challenge de ayer.
+function resetGame() {
+  clearTimeout( game );
+  if( typeof lastHole !== 'undefined') lastHole.classList.remove('up');
 }
 //
 // Event Listeners
